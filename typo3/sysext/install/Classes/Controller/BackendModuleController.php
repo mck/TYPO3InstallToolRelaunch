@@ -40,7 +40,9 @@ class BackendModuleController
      *
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
+     *
      * @return ResponseInterface
+     * @throws \InvalidArgumentException
      */
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -48,10 +50,20 @@ class BackendModuleController
         $enableFileService = GeneralUtility::makeInstance(EnableFileService::class);
         /** @var AbstractFormProtection $formProtection */
         $formProtection = FormProtectionFactory::get();
+        $targetUrl = 'sysext/install/Start/Install.php?install[context]=backend';
+
+        if (!empty($request->getQueryParams()['install']['action'])) {
+            $subAction = !empty($request->getQueryParams()['install']['action'])
+                ? $request->getQueryParams()['install']['action']
+                : '';
+            $targetUrl .= '&install[controller]=tool&install[action]=' . $subAction;
+        }
 
         if ($enableFileService->checkInstallToolEnableFile()) {
             // Install tool is open and valid, redirect to it
-            $response = $response->withStatus(303)->withHeader('Location', 'sysext/install/Start/Install.php?install[context]=backend');
+            $response = $response
+                ->withStatus(303)
+                ->withHeader('Location', $targetUrl);
         } elseif ($request->getMethod() === 'POST' && $request->getParsedBody()['action'] === 'enableInstallTool') {
             // Request to open the install tool
             $installToolEnableToken = $request->getParsedBody()['installToolEnableToken'];
@@ -60,7 +72,9 @@ class BackendModuleController
             }
             $enableFileService->createInstallToolEnableFile();
             // Install tool is open and valid, redirect to it
-            $response = $response->withStatus(303)->withHeader('Location', 'sysext/install/Start/Install.php?install[context]=backend');
+            $response = $response
+                ->withStatus(303)
+                ->withHeader('Location', $targetUrl);
         } else {
             // Show the "create enable install tool" button
             /** @var StandaloneView $view */
