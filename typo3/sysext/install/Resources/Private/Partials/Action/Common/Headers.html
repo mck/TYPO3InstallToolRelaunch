@@ -7,3 +7,13 @@
 <script type="text/javascript" src="../Resources/Public/JavaScript/bootstrap.min.js?{time}"></script>
 <script type="text/javascript" src="../Resources/Public/JavaScript/tagsort.min.js?{time}"></script>
 <script type="text/javascript" src="../Resources/Public/JavaScript/Install.js?{time}"></script>
+
+
+<f:if condition="!{contextService.backendContext}">
+    <f:then>
+        <f:comment>
+            <script type="text/javascript" src="/typo3/sysext/core/Resources/Public/JavaScript/Contrib/require.js?{time}"></script>
+            <script type="text/javascript" src="../Resources/Public/JavaScript/ModuleMenu.js?{time}"></script>
+        </f:comment>
+    </f:then>
+</f:if>
