@@ -72,3 +72,16 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['compatibilit
     = \TYPO3\CMS\Install\Updates\Compatibility7ExtractionUpdate::class;
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['formLegacyExtractionUpdate']
     = \TYPO3\CMS\Install\Updates\FormLegacyExtractionUpdate::class;
+
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$icons = [
+    'module-install' => 'EXT:install/Resources/Public/Icons/module-install.svg',
+    'module-install-environment' => 'EXT:install/Resources/Public/Icons/module-install-environment.svg',
+    'module-install-maintenance' => 'EXT:install/Resources/Public/Icons/module-install-maintenance.svg',
+    'module-install-settings' => 'EXT:install/Resources/Public/Icons/module-install-settings.svg',
+    'module-install-upgrade' => 'EXT:install/Resources/Public/Icons/module-install-upgrade.svg',
+];
+foreach ($icons as $iconIdentifier => $source) {
+    $iconRegistry->registerIcon($iconIdentifier, \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => $source]);
+}

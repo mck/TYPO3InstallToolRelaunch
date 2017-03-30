@@ -40,6 +40,7 @@ $GLOBALS['TBE_MODULES'] = [
     'file' => '',
     'user' => '',
     'tools' => '',
+    'install' => '',
     'system' => '',
     'help' => '',
     '_configuration' => [
@@ -64,6 +65,11 @@ $GLOBALS['TBE_MODULES'] = [
             'labels' => 'LLL:EXT:lang/Resources/Private/Language/locallang_mod_admintools.xlf',
             'name' => 'tools',
             'iconIdentifier' => 'module-tools'
+        ],
+        'install' => [
+            'labels' => 'LLL:EXT:lang/Resources/Private/Language/locallang_mod_install.xlf',
+            'name' => 'install',
+            'iconIdentifier' => 'module-install'
         ],
         'system' => [
             'labels' => 'LLL:EXT:lang/Resources/Private/Language/locallang_mod_system.xlf',
