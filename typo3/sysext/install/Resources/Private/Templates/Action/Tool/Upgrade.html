@@ -3,10 +3,6 @@
 <f:layout name="ToolAuthenticated" />
 <f:section name="Content">
 
-    <f:for each="{actionMessages}" as="statusMessage">
-        <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
-    </f:for>
-
     <f:render partial="Action/Common/ActionTitle" arguments="{label: 'Upgrade'}" />
 
     <div role="tabpanel">
