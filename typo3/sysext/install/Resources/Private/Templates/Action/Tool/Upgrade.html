@@ -6,6 +6,9 @@
     <f:for each="{actionMessages}" as="statusMessage">
         <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
     </f:for>
+
+    <f:render partial="Action/Common/ActionTitle" arguments="{label: 'Upgrade'}" />
+
     <div role="tabpanel">
         <ul class="nav nav-tabs t3js-tabs" role="tablist">
             <li role="presentation" class="active t3js-tabmenu-item"><a href="#core" aria-controls="core" role="tab" data-toggle="tab">Core</a></li>
