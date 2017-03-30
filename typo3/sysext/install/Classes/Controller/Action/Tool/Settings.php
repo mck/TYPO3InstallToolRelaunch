@@ -52,6 +52,10 @@ class Settings extends Action\AbstractAction
     protected function executeAction()
     {
         $actionMessages = [];
+        if (isset($this->postValues['set']['changeInstallToolPassword'])) {
+            $actionMessages[] = $this->changeInstallToolPassword();
+        }
+
         if (isset($this->postValues['set']['activate'])) {
             $actionMessages[] = $this->activate();
             $this->activate();
@@ -62,6 +66,38 @@ class Settings extends Action\AbstractAction
         $this->view->assign('features', $this->featureManager->getInitializedFeatures($postValues));
 
         return $this->view->render();
+    }
+
+    /**
+     * Set new password if requested
+     *
+     * @return \TYPO3\CMS\Install\Status\StatusInterface
+     */
+    protected function changeInstallToolPassword()
+    {
+        $values = $this->postValues['values'];
+        if ($values['newInstallToolPassword'] !== $values['newInstallToolPasswordCheck']) {
+            /** @var $message \TYPO3\CMS\Install\Status\StatusInterface */
+            $message = GeneralUtility::makeInstance(\TYPO3\CMS\Install\Status\ErrorStatus::class);
+            $message->setTitle('Install tool password not changed');
+            $message->setMessage('Given passwords do not match.');
+        } elseif (strlen($values['newInstallToolPassword']) < 8) {
+            /** @var $message \TYPO3\CMS\Install\Status\StatusInterface */
+            $message = GeneralUtility::makeInstance(\TYPO3\CMS\Install\Status\ErrorStatus::class);
+            $message->setTitle('Install tool password not changed');
+            $message->setMessage('Given password must be at least eight characters long.');
+        } else {
+            /** @var \TYPO3\CMS\Core\Configuration\ConfigurationManager $configurationManager */
+            $configurationManager = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ConfigurationManager::class);
+            $configurationManager->setLocalConfigurationValueByPath(
+                'BE/installToolPassword',
+                $this->getHashedPassword($values['newInstallToolPassword'])
+            );
+            /** @var $message \TYPO3\CMS\Install\Status\StatusInterface */
+            $message = GeneralUtility::makeInstance(\TYPO3\CMS\Install\Status\OkStatus::class);
+            $message->setTitle('Install tool password changed');
+        }
+        return $message;
     }
 
     /**
