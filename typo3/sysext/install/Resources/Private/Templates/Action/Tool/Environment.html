@@ -6,6 +6,10 @@
     <f:for each="{actionMessages}" as="statusMessage">
         <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
     </f:for>
+
+    <f:render partial="Action/Common/ActionTitle" arguments="{label: 'Environment'}" />
+
+
     <div role="tabpanel">
         <ul class="nav nav-tabs t3js-tabs" role="tablist">
             <li role="presentation" class="active t3js-tabmenu-item"><a href="#status" aria-controls="status" role="tab" data-toggle="tab">Status</a></li>
