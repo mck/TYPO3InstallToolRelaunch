@@ -3,10 +3,6 @@
 <f:layout name="ToolAuthenticated" />
 <f:section name="Content">
 
-    <f:for each="{actionMessages}" as="statusMessage">
-        <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
-    </f:for>
-
     <f:render partial="Action/Common/ActionTitle" arguments="{label: 'Settings'}" />
 
 
@@ -50,13 +46,8 @@
                         </f:for>
                     </div>
 
-                    <div id="fixed-footer-handler">
-                        <div id="fixed-footer">
-                            <div class="footer-innerWrap">
-                                <f:render partial="Action/Common/SubmitButton" arguments="{name:'activate', text:'Activate', className:'btn-save'}"/>
-                            </div>
-                        </div>
-                    </div>
+                    <f:render partial="Action/Common/SubmitButton" arguments="{name:'activate', text:'Activate', className:'btn-save'}"/>
+
 
                 </form>
 
@@ -67,9 +58,6 @@
 
                         <f:if condition="{savedConfigurationValueMessages}">
                             <f:then>
-                                <f:for each="{savedConfigurationValueMessages}" as="statusMessage">
-                                    <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
-                                </f:for>
                             </f:then>
 
                             <f:else>
@@ -118,14 +106,8 @@
                                 </f:for>
                             </div>
 
-                            <div id="fixed-footer-handler">
-                                <div id="fixed-footer">
-                                    <div class="footer-innerWrap">
-                                        <f:render partial="Action/Common/SubmitButton" arguments="{name:'write', text:'Write configuration', className:'btn-save'}"/>
-                                        <span class="btn btn-default t3js-all-configuration-toggle">Toggle All</span>
-                                    </div>
-                                </div>
-                            </div>
+                             <f:render partial="Action/Common/SubmitButton" arguments="{name:'write', text:'Write configuration', className:'btn-save'}"/>
+                             <span class="btn btn-default t3js-all-configuration-toggle">Toggle All</span>
                         </form>
                     </f:else>
                 </f:if>

@@ -1098,6 +1098,8 @@ TYPO3.Install.upgradeAnalysis = {
 TYPO3.Install.navigation = {
 
     initialize: function () {
+        $('#myModal.in').modal('show');
+
         $('a[role="tab"]').on("shown.bs.tab", function(e) {
         	console.log($(e.target).attr("href").substr(1));
             var id = $(e.target).attr("href").substr(1);
