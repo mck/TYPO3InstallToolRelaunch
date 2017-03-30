@@ -42,14 +42,7 @@ class Upgrade extends Action\AbstractAction
         /** @var \TYPO3\CMS\Install\Service\CoreUpdateService $coreUpdateService */
         $coreUpdateService = GeneralUtility::makeInstance(\TYPO3\CMS\Install\Service\CoreUpdateService::class);
         $this->view
-            ->assign('enableCoreUpdate', $coreUpdateService->isCoreUpdateEnabled())
-            ->assign('composerMode', Bootstrap::usesComposerClassLoading())
-            ->assign('operatingSystem', $operatingSystem)
-            ->assign('cgiDetected', GeneralUtility::isRunningOnCgiServerApi())
-            ->assign('extensionCompatibilityTesterProtocolFile', GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'typo3temp/assets/ExtensionCompatibilityTester.txt')
-            ->assign('extensionCompatibilityTesterErrorProtocolFile', GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'typo3temp/assets/ExtensionCompatibilityTesterErrors.json')
-            ->assign('extensionCompatibilityTesterMessages', $this->getExtensionCompatibilityTesterMessages())
-            ->assign('listOfOpcodeCaches', $opcodeCacheService->getAllActive());
+            ->assign('enableCoreUpdate', $coreUpdateService->isCoreUpdateEnabled());
         return $this->view->render();
     }
 }

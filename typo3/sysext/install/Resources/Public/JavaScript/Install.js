@@ -452,6 +452,9 @@ TYPO3.Install.TcaIntegrityChecker = {
 	checkTcaIntegrity: function(actionName) {
 		var self = this;
 		var url = location.href + '&install[controller]=ajax&install[action]=' + actionName;
+		if (location.hash) {
+			url = url.replace(location.hash, "");
+		}
 
 		var isInitialized = self.initialize(actionName);
 		if(isInitialized) {
