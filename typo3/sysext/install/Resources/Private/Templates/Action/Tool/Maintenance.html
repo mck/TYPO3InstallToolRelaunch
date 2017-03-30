@@ -7,7 +7,8 @@
         <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
     </f:for>
 
-
+    <h1>Maintenance</h1>
+    <hr />
     <div role="tabpanel">
          <ul class="nav nav-tabs t3js-tabs" role="tablist">
             <li role="presentation" class="active t3js-tabmenu-item"><a href="#cache" aria-controls="cache" role="tab" data-toggle="tab">Cache</a></li>
@@ -79,21 +80,6 @@
                                         <hr />
                                     </f:else>
                                 </f:if>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingClearProcessedFiles">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#clearProcessedFiles" aria-expanded="false" aria-controls="clearProcessedFiles" class="collapsed">
-                                    <span class="caret"></span>
-                                    Clear processed files
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="clearProcessedFiles" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingClearProcessedFiles">
-                            <div class="panel-body">
-                                <f:render partial="Action/Tool/CleanUp/ProcessedFiles" arguments="{_all}" />
                             </div>
                         </div>
                     </div>
