@@ -28,6 +28,10 @@ class ToolController extends AbstractController
      * @var array List of valid action names that need authentication
      */
     protected $authenticationActions = [
+        'maintenance',
+        'settings',
+        'environment',
+        'upgrade',
         'importantActions',
         'systemEnvironment',
         'configuration',

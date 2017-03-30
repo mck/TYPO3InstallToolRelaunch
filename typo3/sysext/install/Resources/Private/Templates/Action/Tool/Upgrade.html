@@ -1,0 +1,65 @@
+{namespace i=TYPO3\CMS\Install\ViewHelpers}
+
+<f:layout name="ToolAuthenticated" />
+<f:section name="Content">
+
+    <f:for each="{actionMessages}" as="statusMessage">
+        <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
+    </f:for>
+    <div role="tabpanel">
+        <ul class="nav nav-tabs t3js-tabs" role="tablist">
+            <li role="presentation" class="active t3js-tabmenu-item"><a href="#core" aria-controls="core" role="tab" data-toggle="tab">Core</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#wizard" aria-controls="wizard" role="tab" data-toggle="tab" aria-expanded="false">Wizard</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#analyser" aria-controls="analyser" role="tab" data-toggle="tab" aria-expanded="false">Analyser</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#tcaMigration" aria-controls="tcaMigration" role="tab" data-toggle="tab" aria-expanded="false">TCA Migration</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#migrationManager" aria-controls="migrationManager" role="tab" data-toggle="tab" aria-expanded="false">Migration Manager</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="core">
+                <f:render partial="Action/Tool/ImportantActions/CoreUpdateButton" arguments="{_all}"/>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="wizard">
+                <h1>Upgrade Wizard</h1>
+
+                <f:for each="{actionMessages}" as="statusMessage">
+                    <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
+                </f:for>
+
+                <f:if condition="{updateAction} == 'listUpdates'">
+                    <f:render partial="Action/Tool/UpgradeWizard/ListUpdates" arguments="{_all}" />
+                </f:if>
+
+                <f:if condition="{updateAction} == 'getUserInput'">
+                    <f:render partial="Action/Tool/UpgradeWizard/GetUserInput" arguments="{_all}" />
+                </f:if>
+
+                <f:if condition="{updateAction} == 'performUpdate'">
+                    <f:render partial="Action/Tool/UpgradeWizard/PerformUpdate" arguments="{_all}" />
+                </f:if>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="analyser">
+                <h1>Upgrade Analysis</h1>
+
+                <div class="btn-toolbar" role="toolbar" aria-label="Button Bar">
+                    <div class="btn-group mr-2" role="group">
+                        <button type="button" id="t3js-showFilterManager" class="btn btn-default">Show Filter Manager</button>
+                    </div>
+                </div>
+                <div class="t3js-filterManager"></div>
+                <div id="tagsort_tags_container"></div>
+                <div id="upgradeAnalysis_output">
+                    <f:render partial="Action/Tool/UpgradeAnalysis/ListDocumentation" section="Main" arguments="{_all}"/>
+                </div>
+                <span id="saveIgnoredItemsToken" style="display:none;">{saveIgnoredItemsToken}</span>
+                <span id="removeIgnoredItemsToken" style="display:none;">{removeIgnoredItemsToken}</span>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tcaMigration">
+                <f:render partial="Action/Tool/ImportantActions/TcaMigrationsCheck" arguments="{_all}"/>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="migrationManager">
+            </div>
+        </div>
+    </div>
+
+</f:section>

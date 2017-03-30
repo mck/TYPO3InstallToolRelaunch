@@ -1,0 +1,70 @@
+<div class="modulemenu t3js-modulemenu" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+	<ul class="nav nav-modules" data-role="modulemenu" id="menu">
+		<li class="modulemenu-group expanded" id="web" data-modulename="web" data-navigationcomponentid="" data-navigationframescript="" data-navigationframescriptparameters="">
+			<div class="modulemenu-group-header">
+				<span class="modulemenu-icon modulemenu-group-icon">
+					<span class="t3js-icon icon icon-size-default icon-state-default icon-module-web" data-identifier="module-web">
+						<span class="icon-markup">
+							<span class="icon-unify"><i class="fa fa-file-o"></i></span>
+						</span>
+					</span>
+				</span>
+				<span class="modulemenu-group-title">
+					Install tool <span class="caret"></span>
+				</span>
+			</div>
+			<ul class="modulemenu-group-container">
+				<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'maintenance', label: 'Maintenance'}" />
+				<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'settings', label: 'Settings'}" />
+				<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'upgrade', label: 'Upgrade'}" />
+				<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'environment', label: 'Environment'}" />
+
+				<f:comment>
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'importantActions', label: 'Important actions'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'configuration', label: 'Configuration Presets'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'allConfiguration', label: 'All configuration'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'upgradeWizard', label: 'Upgrade Wizard'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'upgradeAnalysis', label: 'Upgrade Analysis'}"/>
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'systemEnvironment', label: 'System environment'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'folderStructure', label: 'Folder structure'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'testSetup', label: 'Test setup'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'cleanUp', label: 'Clean up'}" />
+					<f:render partial="Action/Common/MenuModuleLink" arguments="{action: action, context: context, action_name: 'about', label: 'About'}" />
+				</f:comment>
+			</ul>
+		</li>
+		<f:if condition="{contextService.backendContext}">
+			<f:then></f:then>
+			<f:else>
+				<li class="modulemenu-group expanded" id="web" data-modulename="web" data-navigationcomponentid="" data-navigationframescript="" data-navigationframescriptparameters="">
+					<ul class="modulemenu-group-container">
+						<li class="modulemenu-item t3js-mainmodule ">
+							<a class="modulemenu-item-link" href="../../../index.php" class="btn btn-default btn-block">
+								<span class="modulemenu-icon modulemenu-item-icon">
+									<span class="t3js-icon icon icon-size-default icon-state-default icon-module-system_extinstall" data-identifier="module-system_extinstall">
+										<span class="icon-markup">
+											<img src="/typo3/sysext/install/Resources/Public/Icons/module-install.svg" width="32" height="32">
+										</span>
+									</span>
+								</span>
+								<span class="modulemenu-item-title">Backend admin</span>
+							</a>
+						</li>
+						<li class="modulemenu-item t3js-mainmodule ">
+							<a class="modulemenu-item-link" href="../../../../index.php" class="btn btn-default btn-block">
+								<span class="modulemenu-icon modulemenu-item-icon">
+									<span class="t3js-icon icon icon-size-default icon-state-default icon-module-system_extinstall" data-identifier="module-system_extinstall">
+										<span class="icon-markup">
+											<img src="/typo3/sysext/install/Resources/Public/Icons/module-install.svg" width="32" height="32">
+										</span>
+									</span>
+								</span>
+								<span class="modulemenu-item-title">Frontend website</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</f:else>
+		</f:if>
+	</ul>
+</div>

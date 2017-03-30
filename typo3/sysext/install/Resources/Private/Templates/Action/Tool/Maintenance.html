@@ -1,0 +1,179 @@
+{namespace i=TYPO3\CMS\Install\ViewHelpers}
+
+<f:layout name="ToolAuthenticated" />
+<f:section name="Content">
+
+    <f:for each="{actionMessages}" as="statusMessage">
+        <f:render partial="Action/Common/StatusMessage" arguments="{message: statusMessage}" />
+    </f:for>
+
+
+    <div role="tabpanel">
+         <ul class="nav nav-tabs t3js-tabs" role="tablist">
+            <li role="presentation" class="active t3js-tabmenu-item"><a href="#cache" aria-controls="cache" role="tab" data-toggle="tab">Cache</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#database" aria-controls="database" role="tab" data-toggle="tab" aria-expanded="false">Database</a></li>
+            <li role="presentation" class="t3js-tabmenu-item"><a href="#backendUsers" aria-controls="backendUsers" role="tab" data-toggle="tab" aria-expanded="false">Backend Users</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="cache">
+                <div class="panel-group" id="accordionCache" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingClearAllCache">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#clearAllCache" aria-expanded="false" aria-controls="clearAllCache" class="collapsed">
+                                    <span class="caret"></span>
+                                    Clear all Cache
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="clearAllCache" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingClearAllCache">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/ImportantActions/ClearAllCache" arguments="{_all}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingCleanTemp">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#cleanTemp" aria-expanded="false" aria-controls="cleanTemp" class="collapsed">
+                                    <span class="caret"></span>
+                                    Clean typo3temp/ folder
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="cleanTemp" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCleanTemp">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/CleanUp/Typo3TempFiles" arguments="{_all}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingClearProcessed">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#clearProcessed" aria-expanded="false" aria-controls="clearProcessed" class="collapsed">
+                                    <span class="caret"></span>
+                                    Clear processed files
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="clearProcessed" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingClearProcessed">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/CleanUp/ProcessedFiles" arguments="{_all}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingDumpAutoLoad">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#dumpAutoLoad" aria-expanded="false" aria-controls="dumpAutoLoad" class="collapsed">
+                                    <span class="caret"></span>
+                                    Dump Autoload Information
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="dumpAutoLoad" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDumpAutoLoad">
+                            <div class="panel-body">
+                                <f:if condition="{composerMode}">
+                                    <f:else>
+                                        <f:render partial="Action/Tool/ImportantActions/DumpAutoload" arguments="{_all}"/>
+                                        <hr />
+                                    </f:else>
+                                </f:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingClearProcessedFiles">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionCache" href="#clearProcessedFiles" aria-expanded="false" aria-controls="clearProcessedFiles" class="collapsed">
+                                    <span class="caret"></span>
+                                    Clear processed files
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="clearProcessedFiles" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingClearProcessedFiles">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/CleanUp/ProcessedFiles" arguments="{_all}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="database">
+                <div class="panel-group" id="accordionDatabase" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingAnalyser">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionDatabase" href="#analyser" aria-expanded="false" aria-controls="analyser" class="collapsed">
+                                    <span class="caret"></span>
+                                    Analyser
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="analyser" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAnalyser">
+                            <div class="panel-body">
+                                <f:if condition="{databaseAnalyzerSuggestion}">
+                                    <f:then>
+                                        <f:render partial="Action/Tool/ImportantActions/DatabaseAnalyzerData" arguments="{_all}"/>
+                                    </f:then>
+                                    <f:else>
+                                        <f:render partial="Action/Tool/ImportantActions/DatabaseAnalyzerButton" arguments="{_all}"/>
+                                    </f:else>
+                                </f:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingClearTables">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionDatabase" href="#clearTables" aria-expanded="false" aria-controls="clearTables" class="collapsed">
+                                    <span class="caret"></span>
+                                    Clear tables
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="clearTables" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingClearTables">
+                            <div class="panel-body">
+                             <f:render partial="Action/Tool/CleanUp/ClearTables" arguments="{_all}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="backendUsers">
+                <div class="panel-group" id="accordionBackendUsers" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingCreateAdminUser">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionBackendUsers" href="#createAdminUser" aria-expanded="false" aria-controls="createAdminUser" class="collapsed">
+                                    <span class="caret"></span>
+                                    Create
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="createAdminUser" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCreateAdminUser">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/ImportantActions/CreateAdministrator" arguments="{_all}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingReset">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionBackendUsers" href="#resetPreferences" aria-expanded="false" aria-controls="resetPreferences" class="collapsed">
+                                    <span class="caret"></span>
+                                    Reset
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="resetPreferences" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingReset">
+                            <div class="panel-body">
+                                <f:render partial="Action/Tool/CleanUp/ResetBackendUserUc" arguments="{_all}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>

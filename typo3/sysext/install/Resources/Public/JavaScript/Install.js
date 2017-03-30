@@ -1006,11 +1006,11 @@ $(function() {
 	});
 
 	TYPO3.Install.upgradeAnalysis.initialize();
-
 	TYPO3.Install.upgradeAnalysis.showFilterManager();
-
 	TYPO3.Install.upgradeAnalysis.hideDoumentationFile();
 	TYPO3.Install.upgradeAnalysis.restoreDocumentationFile();
+
+    TYPO3.Install.navigation.initialize();
 });
 
 TYPO3.Install.upgradeAnalysis = {
@@ -1091,4 +1091,75 @@ TYPO3.Install.upgradeAnalysis = {
 			}
 		});
 	}
+};
+TYPO3.Install.navigation = {
+
+    initialize: function () {
+        $('a[role="tab"]').on("shown.bs.tab", function(e) {
+        	console.log($(e.target).attr("href").substr(1));
+            var id = $(e.target).attr("href").substr(1);
+            window.location.hash = id;
+
+            $('form').prop('action', function(i, val) {
+                var actionUrl = val.split('#')[0] + window.location.hash;
+                console.log(actionUrl);
+                return actionUrl;
+            });
+
+        });
+        $(".collapse").on('show.bs.collapse', function(e) {
+            window.location.hash = this.id;
+            $('form').prop('action', function(i, val) {
+            	var actionUrl = val.split('#')[0] + window.location.hash;
+                console.log(actionUrl);
+                return actionUrl;
+            });
+        });
+        var hash = window.location.hash;
+		if ($('a[href="' + hash + '"][role=tab]').length > 0) {
+            $('a[href="' + hash + '"]').tab('show');
+		}
+		else if ($('a.collapsed[href="' + hash + '"]').length > 0){
+            $(hash).collapse('show');
+			var tabId = $(hash).closest('div.tab-pane').attr('id');
+            $('a[href="#' + tabId + '"]').tab('show');
+		}
+
+        $(document).on('click', '.t3js-topbar-button-modulemenu',
+            function (evt) {
+                evt.preventDefault();
+                TYPO3.Install.navigation.toggleMenu();
+            }
+        );
+    },
+    /**
+     * @param {bool} collapse
+     */
+    toggleMenu: function (collapse) {
+        //TYPO3.Backend.NavigationContainer.cleanup();
+
+        var $mainContainer = $('.t3js-scaffold');
+        var expandedClass = 'scaffold-modulemenu-expanded';
+
+        if (typeof collapse === 'undefined') {
+            collapse = $mainContainer.hasClass(expandedClass);
+        }
+        $mainContainer.toggleClass(expandedClass, !collapse);
+        if (!collapse) {
+            $('.scaffold')
+                .removeClass('scaffold-search-expanded')
+                .removeClass('scaffold-toolbar-expanded');
+        }
+
+        // Persist collapsed state in the UC of the current user
+        Storage.Persistent.set(
+            'BackendComponents.States.typo3-module-menu',
+            {
+                collapsed: collapse
+            }
+        );
+
+        //TYPO3.Backend.doLayout();
+    }
+
 };
