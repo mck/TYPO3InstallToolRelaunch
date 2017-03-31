@@ -11,24 +11,6 @@ if (TYPO3_MODE === 'BE') {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['reports']['tx_reports']['status']['providers']['system'][] = \TYPO3\CMS\Install\Report\EnvironmentStatusReport::class;
     }
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
-        'install',
-        'installenvironment',
-        '',
-        '',
-        [
-            'routeTarget' => \TYPO3\CMS\Install\Controller\BackendModuleController::class . '::index',
-            'routeParameters' => [
-                'install' => [
-                    'action' => 'environment'
-                ]
-            ],
-            'access' => 'admin',
-            'name' => 'install_installenvironment',
-            'iconIdentifier' => 'module-install-environment',
-            'labels' => 'LLL:EXT:install/Resources/Private/Language/ModuleInstallEnvironment.xlf'
-        ]
-    );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
         'install',
@@ -84,6 +66,25 @@ if (TYPO3_MODE === 'BE') {
             'name' => 'install_installupgrade',
             'iconIdentifier' => 'module-install-upgrade',
             'labels' => 'LLL:EXT:install/Resources/Private/Language/ModuleInstallUpgrade.xlf'
+        ]
+    );
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
+        'install',
+        'installenvironment',
+        '',
+        '',
+        [
+            'routeTarget' => \TYPO3\CMS\Install\Controller\BackendModuleController::class . '::index',
+            'routeParameters' => [
+                'install' => [
+                    'action' => 'environment'
+                ]
+            ],
+            'access' => 'admin',
+            'name' => 'install_installenvironment',
+            'iconIdentifier' => 'module-install-environment',
+            'labels' => 'LLL:EXT:install/Resources/Private/Language/ModuleInstallEnvironment.xlf'
         ]
     );
 }

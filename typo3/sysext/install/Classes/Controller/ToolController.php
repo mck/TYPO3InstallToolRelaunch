@@ -170,7 +170,7 @@ class ToolController extends AbstractController
     {
         $action = $this->getAction();
         if ($action === '') {
-            $action = 'importantActions';
+            $action = 'maintenance';
         }
         $this->validateAuthenticationAction($action);
         $actionClass = ucfirst($action);
